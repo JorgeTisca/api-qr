@@ -45,5 +45,5 @@ export async function POST(req) {
 }
 
 export async function GET() {
-    return new Response("Ruta insertqr activa ✅", { status: 200 });
+    return new Response("Ruta insertqr activa", { status: 200 });
 }
