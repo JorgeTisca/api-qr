@@ -1,10 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 
-let prisma;
-if (!global.prisma) {
-    global.prisma = new PrismaClient();
+const globalForPrisma = globalThis;
+
+let prisma =
+    globalForPrisma.prisma ||
+    new PrismaClient({
+        log: ["error"],
+    });
+
+if (process.env.NODE_ENV !== "production") {
+    globalForPrisma.prisma = prisma;
 }
-prisma = global.prisma;
 
 export async function POST(req) {
     try {
@@ -36,4 +42,8 @@ export async function POST(req) {
             { status: 500 }
         );
     }
+}
+
+export async function GET() {
+    return new Response("Ruta insertqr activa ✅", { status: 200 });
 }
