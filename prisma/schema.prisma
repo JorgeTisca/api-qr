@@ -3,12 +3,12 @@ provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model asistenciaPensionados {
   ID      Int      @id @default(autoincrement())
   INTERNO String   @db.VarChar(100)
-  FECHA   DateTime @db.DateTime(0)
+  FECHA   DateTime @db.Timestamp(0)
 }
